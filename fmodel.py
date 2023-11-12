@@ -36,7 +36,7 @@ def load_checkpoint(checkpoint_path):
     hidden_units = checkpoint['hidden_units']
     architecture = checkpoint['structure']
 
-    model, _ = setup_network(architecture, hidden_units, lr)
+    model, _, _ = setup_network(architecture, hidden_units, lr)
     
     model.class_to_idx = checkpoint['class_to_idx']
     model.load_state_dict(checkpoint['state_dict'])

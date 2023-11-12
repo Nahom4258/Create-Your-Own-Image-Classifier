@@ -12,13 +12,12 @@ parser = argparse.ArgumentParser(description='Train the Image Classifier Network
 #     * Set hyperparameters: python train.py data_dir --learning_rate 0.01 --hidden_units 512 --epochs 20 
 #     * Use GPU for training: python train.py data_dir --gpu
 
-parser.add_argument('data_dir', type=str)
+parser.add_argument('data_dir', type=str, default='./flowers')
 parser.add_argument('--save_dir', type=str, default="./checkpoint.pth")
 parser.add_argument('--arch', type=str, default="vgg16")
 parser.add_argument('--learning_rate', type=float, default=0.001)
 parser.add_argument('--hidden_units', type=int, default=4096)
 parser.add_argument('--epochs', type=int, default=3)
-parser.add_argument('--dropouts', type=float)
 parser.add_argument('--gpu', action='store_true')
 
 args = parser.parse_args()
@@ -31,6 +30,18 @@ use_gpu = args.gpu
 epochs = args.epochs
 
 def main():
+    # Print out chosen options
+    print('Data dir: ', data_directory)
+    print('Checkpoint dir: ', checkpoint_save_path)
+    print('Learning rate: ', lr)
+    print('Arch: ', architecture)
+    print('Hidden units: ', hidden_units)
+    print('Epochs: ', epochs)
+    print('Use GPU: ', use_gpu)
+    print('GPU enabled: ', torch.cuda.is_available())
+    print()
+    print()
+    
     # Prepare for training
     train_loader, valid_loader, test_loader, train_data = utilities.load_data(data_directory)
     model, criterion, optimizer = fmodel.setup_network(architecture, hidden_units, lr, use_gpu)

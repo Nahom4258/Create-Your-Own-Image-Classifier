@@ -27,6 +27,8 @@ category_names = args.category_names
 def main():
     model = fmodel.load_checkpoint(checkpoint_path)
     
+    print('************ Prediction started! **************\n')
+    
     with open(category_names, 'r') as f:
         cat_to_name = json.load(f)
         
@@ -37,7 +39,7 @@ def main():
     for i in range(k_number):
         print(f"{labels[i]} with a probability {probability[i]}")
         
-    print('************ Prediction finished! **************')
+    print('\n************ Prediction finished! **************')
     
 if __name__== "__main__":
     main()
